@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Maintenance <a class="btn btn-sm btn-primary" href="/maintenance/add">Add</a></h2>
+<table class="table table-striped">
+<thead><tr><th>ID</th><th>Type</th><th>Date</th><th>Facility</th><th>Description</th><th>Actions</th></tr></thead>
+<tbody>
+{% for m in maintenance %}
+<tr>
+  <td>{{ m.MaintenanceID }}</td>
+  <td>{{ m.MaintenanceType }}</td>
+  <td>{{ m.MaintenanceDate }}</td>
+  <td>{{ m.FacilityName }}</td>
+  <td>{{ m.Description }}</td>
+  <td>
+    <a href="/maintenance/edit/{{ m.MaintenanceID }}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="/maintenance/delete/{{ m.MaintenanceID }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this maintenance record?')">Delete</a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

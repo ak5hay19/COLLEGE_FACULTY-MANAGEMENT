@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+  <h2 class="text-primary mb-4">Add New Staff Member</h2>
+  <form method="post" autocomplete="off">
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input class="form-control" name="name" placeholder="Enter staff name" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Role / Designation</label>
+      <input class="form-control" name="role" placeholder="e.g. Professor, Lab Assistant">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" name="email" type="email" placeholder="example@college.edu">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Contact Number</label>
+      <input class="form-control" name="contact" type="tel" pattern="[0-9]{10}" placeholder="10-digit number">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Department</label>
+      <select class="form-select" name="department">
+        <option value="">-- Select Department --</option>
+        {% for d in departments %}
+          <option value="{{ d.DepartmentID }}">{{ d.DepartmentName }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="d-flex justify-content-between">
+      <a href="{{ url_for('staff') }}" class="btn btn-secondary">Cancel</a>
+      <button class="btn btn-success">Add Staff</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

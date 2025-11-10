@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Reservation</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Facility</label>
+    <select class="form-select" name="facility" required>
+      {% for f in facilities %}
+      <option value="{{ f.FacilityID }}" {% if reservation.FacilityID == f.FacilityID %}selected{% endif %}>{{ f.FacilityName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label class="form-label">Staff</label>
+    <select class="form-select" name="staff" required>
+      {% for s in staff %}
+      <option value="{{ s.StaffID }}" {% if reservation.StaffID == s.StaffID %}selected{% endif %}>{{ s.StaffName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label class="form-label">Purpose</label><input class="form-control" name="purpose" value="{{ reservation.Purpose or '' }}"></div>
+  <div class="row">
+    <div class="col"><label class="form-label">Start</label><input class="form-control" type="datetime-local" name="start" value="{{ reservation.StartTime.strftime('%Y-%m-%dT%H:%M') if reservation.StartTime else '' }}"></div>
+    <div class="col"><label class="form-label">End</label><input class="form-control" type="datetime-local" name="end" value="{{ reservation.EndTime.strftime('%Y-%m-%dT%H:%M') if reservation.EndTime else '' }}"></div>
+  </div>
+  <button class="btn btn-primary mt-2">Update</button>
+  <a href="{{ url_for('reservations') }}" class="btn btn-secondary mt-2">Cancel</a>
+</form>
+{% endblock %}

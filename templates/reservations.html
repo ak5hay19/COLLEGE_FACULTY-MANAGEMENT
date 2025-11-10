@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card shadow p-4">
+  <h2 class="text-primary mb-3">Reservations</h2>
+
+  <form method="post" class="border rounded p-3 mb-4 bg-light">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Facility</label>
+        <select class="form-select" name="facility" required>
+          <option value="">-- Select Facility --</option>
+          {% for f in facilities %}
+            <option value="{{ f.FacilityID }}">{{ f.FacilityName }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Staff</label>
+        <select class="form-select" name="staff" required>
+          <option value="">-- Select Staff --</option>
+          {% for s in staff %}
+            <option value="{{ s.StaffID }}">{{ s.StaffName }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label fw-semibold">Purpose</label>
+        <input class="form-control" name="purpose" placeholder="Meeting, Lecture, etc.">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">Start Time</label>
+        <input class="form-control" type="datetime-local" name="start" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-semibold">End Time</label>
+        <input class="form-control" type="datetime-local" name="end" required>
+      </div>
+    </div>
+
+    <button class="btn btn-success mt-3">Create Reservation</button>
+  </form>
+
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Facility</th>
+        <th>Staff</th>
+        <th>Purpose</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if reservations %}
+        {% for r in reservations %}
+        <tr>
+          <td>{{ r.ReservationID }}</td>
+          <td>{{ r.FacilityName }}</td>
+          <td>{{ r.StaffName }}</td>
+          <td>{{ r.Purpose }}</td>
+          <td>{{ r.StartTime }}</td>
+          <td>{{ r.EndTime }}</td>
+          <td>
+            <a href="/reservations/edit/{{ r.ReservationID }}" class="btn btn-sm btn-outline-warning">Edit</a>
+            <a href="/reservations/delete/{{ r.ReservationID }}" class="btn btn-sm btn-outline-danger"
+               onclick="return confirm('Delete this reservation?')">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td colspan="7" class="text-center text-muted">No reservations yet.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

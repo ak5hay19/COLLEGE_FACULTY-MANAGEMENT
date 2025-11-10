@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Maintenance</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Type</label><input class="form-control" name="type"></div>
+  <div class="mb-3"><label class="form-label">Date</label><input class="form-control" name="date" type="date"></div>
+  <div class="mb-3"><label class="form-label">Facility</label>
+    <select class="form-select" name="facility">
+      <option value="">-- none --</option>
+      {% for f in facilities %}<option value="{{ f.FacilityID }}">{{ f.FacilityName }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3"></textarea></div>
+  <button class="btn btn-primary">Add</button>
+  <a href="{{ url_for('maintenance') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

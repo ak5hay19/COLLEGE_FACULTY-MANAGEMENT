@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Equipment</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Name</label><input class="form-control" name="name" value="{{ equipment.EquipmentName }}" required></div>
+  <div class="mb-3"><label class="form-label">Type</label><input class="form-control" name="type" value="{{ equipment.EquipmentType or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Quantity</label><input class="form-control" name="quantity" type="number" value="{{ equipment.Quantity or 1 }}"></div>
+  <div class="mb-3"><label class="form-label">Facility</label>
+    <select class="form-select" name="facility">
+      <option value="">-- none --</option>
+      {% for f in facilities %}
+      <option value="{{ f.FacilityID }}" {% if equipment.FacilityID == f.FacilityID %}selected{% endif %}>{{ f.FacilityName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">Update</button>
+  <a href="{{ url_for('equipment') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Facilities <a class="btn btn-sm btn-primary" href="/facilities/add">Add</a></h2>
+<table class="table table-striped">
+<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Location</th><th>Capacity</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>
+{% for f in facilities %}
+<tr>
+  <td>{{ f.FacilityID }}</td>
+  <td>{{ f.FacilityName }}</td>
+  <td>{{ f.FacilityType }}</td>
+  <td>{{ f.Location }}</td>
+  <td>{{ f.Capacity }}</td>
+  <td>{{ f.Status }}</td>
+  <td>
+    <a href="/facilities/edit/{{ f.FacilityID }}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="/facilities/delete/{{ f.FacilityID }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this facility?')">Delete</a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

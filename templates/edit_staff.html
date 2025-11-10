@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Staff</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Name</label><input class="form-control" name="name" value="{{ staff.StaffName }}" required></div>
+  <div class="mb-3"><label class="form-label">Role</label><input class="form-control" name="role" value="{{ staff.Role or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Email</label><input class="form-control" name="email" type="email" value="{{ staff.Email or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Contact</label><input class="form-control" name="contact" value="{{ staff.ContactNumber or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Department</label>
+    <select class="form-select" name="department">
+      <option value="">-- none --</option>
+      {% for d in departments %}
+      <option value="{{ d.DepartmentID }}" {% if staff.DepartmentID == d.DepartmentID %}selected{% endif %}>{{ d.DepartmentName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary">Update</button>
+  <a href="{{ url_for('staff') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

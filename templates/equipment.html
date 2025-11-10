@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Equipment <a class="btn btn-sm btn-primary" href="/equipment/add">Add</a></h2>
+<table class="table table-striped">
+<thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Qty</th><th>Facility</th><th>Actions</th></tr></thead>
+<tbody>
+{% for e in equipment %}
+<tr>
+  <td>{{ e.EquipmentID }}</td>
+  <td>{{ e.EquipmentName }}</td>
+  <td>{{ e.EquipmentType }}</td>
+  <td>{{ e.Quantity }}</td>
+  <td>{{ e.FacilityName }}</td>
+  <td>
+    <a href="/equipment/edit/{{ e.EquipmentID }}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="/equipment/delete/{{ e.EquipmentID }}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this equipment?')">Delete</a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

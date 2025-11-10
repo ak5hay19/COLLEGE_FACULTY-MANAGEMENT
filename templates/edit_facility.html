@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Facility</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Name</label><input class="form-control" name="name" value="{{ facility.FacilityName }}" required></div>
+  <div class="mb-3"><label class="form-label">Type</label>
+    <select class="form-select" name="type_id">
+      <option value="">-- none --</option>
+      {% for t in types %}
+      <option value="{{ t.FacilityTypeID }}" {% if facility.FacilityTypeID == t.FacilityTypeID %}selected{% endif %}>{{ t.TypeName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label class="form-label">Location</label><input class="form-control" name="location" value="{{ facility.Location or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Capacity</label><input class="form-control" name="capacity" type="number" value="{{ facility.Capacity or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Status</label>
+    <select class="form-select" name="status">
+      <option value="Available" {% if facility.Status == 'Available' %}selected{% endif %}>Available</option>
+      <option value="Booked" {% if facility.Status == 'Booked' %}selected{% endif %}>Booked</option>
+      <option value="Maintenance" {% if facility.Status == 'Maintenance' %}selected{% endif %}>Maintenance</option>
+      <option value="Closed" {% if facility.Status == 'Closed' %}selected{% endif %}>Closed</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Update</button>
+  <a href="{{ url_for('facilities') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

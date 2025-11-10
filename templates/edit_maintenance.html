@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Edit Maintenance</h2>
+<form method="post">
+  <div class="mb-3"><label class="form-label">Type</label><input class="form-control" name="type" value="{{ maintenance.MaintenanceType or '' }}"></div>
+  <div class="mb-3"><label class="form-label">Date</label><input class="form-control" name="date" type="date" value="{{ maintenance.MaintenanceDate.strftime('%Y-%m-%d') if maintenance.MaintenanceDate else '' }}"></div>
+  <div class="mb-3"><label class="form-label">Facility</label>
+    <select class="form-select" name="facility">
+      <option value="">-- none --</option>
+      {% for f in facilities %}
+      <option value="{{ f.FacilityID }}" {% if maintenance.FacilityID == f.FacilityID %}selected{% endif %}>{{ f.FacilityName }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3"><label class="form-label">Description</label><textarea class="form-control" name="description" rows="3">{{ maintenance.Description or '' }}</textarea></div>
+  <button class="btn btn-primary">Update</button>
+  <a href="{{ url_for('maintenance') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
