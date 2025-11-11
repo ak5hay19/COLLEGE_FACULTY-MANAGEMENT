@@ -154,7 +154,7 @@ INSERT INTO FacilityType (TypeName) VALUES
 
 DELIMITER $$
 
--- 1️⃣ Prevent Reservation if Maintenance Exists
+
 CREATE TRIGGER prevent_reservation_on_maintenance
 BEFORE INSERT ON Reservation
 FOR EACH ROW
@@ -171,7 +171,7 @@ BEGIN
     END IF;
 END$$
 
--- 2️⃣ Auto-Cancel Reservations if Maintenance Added
+
 CREATE TRIGGER cancel_reservations_on_maintenance
 AFTER INSERT ON Maintenance
 FOR EACH ROW
